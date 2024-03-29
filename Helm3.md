@@ -269,7 +269,7 @@ my-nginx   NodePort   10.233.36.35   <none>        80:30080/TCP   36m
 
 
 
-### 7.练习安装kafka
+### 6.练习安装kafka
 
 查询
 
@@ -390,7 +390,99 @@ To create a pod that you can use as a Kafka client run the following commands:
 
 
 
-### 6.创建chart
+### 7.练习安装nats
+
+#### 1.添加仓库
+
+```
+root@ubuntu20:~# helm repo add nats https://nats-io.github.io/k8s/helm/charts/
+"nats" has been added to your repositories
+```
+
+
+
+#### 2.查看仓库
+
+```
+root@ubuntu20:~# helm repo list
+NAME           	URL                                                 
+koderover-chart	https://koderover.tencentcloudcr.com/chartrepo/chart
+bitnami        	https://charts.bitnami.com/bitnami                  
+nats           	https://nats-io.github.io/k8s/helm/charts/       
+```
+
+
+
+#### 3.从已添加的仓库里面查找所有的 nats
+
+```shell
+root@ubuntu20:~# helm search repo nats
+NAME                    	CHART VERSION	APP VERSION	DESCRIPTION                                       
+bitnami/nats            	8.0.0        	2.10.12    	NATS is an open source, lightweight and high-pe...
+nats/nats               	1.1.10       	2.10.12    	A Helm chart for the NATS.io High Speed Cloud N...
+nats/nats-account-server	0.8.0        	1.0.0      	A Helm chart for the NATS.io JWT Account Server   
+nats/nats-kafka         	0.15.4       	1.4.2      	A multi-connector bridge between NATS and Kafka.  
+nats/nats-operator      	0.8.3        	0.8.3      	NATS operator creates/configures/manages nats c...
+nats/nack               	0.25.1       	0.14.1     	A Helm chart for NACK                             
+nats/stan               	0.13.0       	0.24.1     	A Helm chart for NATS Streaming                   
+nats/surveyor           	0.16.6       	0.5.4      	NATS Monitoring, Simplified. 
+```
+
+
+
+#### 4.下载到本地
+
+```shell
+root@ubuntu20:~# helm pull nats/nats
+
+```
+
+
+
+#### 5.解压
+
+```shell
+root@ubuntu20:~# ls |grep nats
+nats-1.1.10.tgz
+root@ubuntu20:~# tar -zxf nats-1.1.10.tgz
+root@ubuntu20:~# cd nats
+root@ubuntu20:~/nats#
+```
+
+
+
+#### 6.修改
+
+```shell
+
+```
+
+
+
+#### 7.安装
+
+```shell
+root@ubuntu20:~/nats# helm install my-nats . --namespace=default
+NAME: my-nats
+LAST DEPLOYED: Fri Mar 29 15:53:04 2024
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+```
+
+
+
+#### 8.卸载
+
+```shell
+root@ubuntu20:~# helm uninstall my-nats
+release "my-nats" uninstalled
+
+```
+
+
+
+### 10.创建chart
 
 ```shell
 root@ubuntu20:~# helm create my_chart
@@ -436,5 +528,4 @@ root@ubuntu20:~# cd kafka/
 root@ubuntu20:~/kafka# ls
 Chart.lock  charts  Chart.yaml  README.md  templates  values.yaml
 ```
-
 
